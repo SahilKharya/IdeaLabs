@@ -25,4 +25,21 @@ window.addEventListener('load', async () => {
   else {
     console.log('No web3 provider detected');
   }
+  const qr = new EthereumQRPlugin();
+
+  const sendDetails = {
+      to: '0x243ea5FD501E7f4131B830AE20706196a4F2f3Ef',
+      value: 1,
+      gas: 42000
+  };
+  const configDetails = {
+    size: 180,
+    selector: '#eth-qr',
+    options: {
+      margin: 2
+    }
+  };
+
+  //run the plugin
+  qr.toCanvas(sendDetails, configDetails);
 })
