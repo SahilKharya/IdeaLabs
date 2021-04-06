@@ -9,30 +9,83 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-  <script src="./node_modules/web3/dist/web3.min.js"></script>
+  <!-- <script src="./node_modules/web3/dist/web3.min.js"></script> -->
+  <script type="text/javascript" src="http://unpkg.com/web3@1.2.4/dist/web3.min.js"></script>
+ 
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="./ethereum-qr.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<style>
+
+</style>
 </head>
+
 <body>
-  <div id="eth-qr"></div>
+  <div class="container-fluid">
+    <div class="text-center" style="display: flex;background-color: cornflowerblue; border-radius: 5px;">
+      <div style="width: 100%;">
+        <p style="color: whitesmoke; text-align: center;">Welcome:
+          <h5 id="address"> </h5>
+          </p>
+      </div>
+      <!-- <div class="text-center"  style="width: 40%;">
+        <p style="color: whitesmoke; text-align: center;">Current Ethereum Price (in INR):
+        <h5 id="eth_inr"> </h5>
+        </p>
+      </div> -->
+    </div>
 
-  <br>
+    <br>
+    <div class="row">
+      <div class="card col s6">
+        <br>
+        <h3>Add Patient Records</h3>
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name">
+          </div>
+          <div class="form-group">
+            <label for="record">Record</label>
+            <input type="text" class="form-control" id="record">
 
-  <script type="module" src="ethereum-qr.js">
-    import {EthereumQRPlugin} from './ethereum-qr.js'; // Or it could be simply `hello.js`
-    
-  </script>
-  <script src="./index.js"></script>
+          </div>
+          <button onclick="storeRecords()" type="submit" class="btn btn-primary">Submit</button>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-  integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-  integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-</script>
+        </form>
+      </div>
+      <!-- <h3>QR Code Generator</h3>
+      <div><input id="qr-text" type="text" placeholder="Text to generate QR code" /></div>
+      <br />-->
+      <div class="col s6 text-center">
+        <div> 
+          <button class="qr-btn" onclick="getRecords()">Get Records</button>
+          <div id="resultRec"></div>
+        </div>
+        <div> 
+          <br>
+        <button class="qr-btn" onclick="generateQRCode()">Create QR Code</button>
+        <div>
+          <canvas id="qr-code"></canvas>
+
+        </div>
+      </div>
+    </div><br />
+
+    </div>
+  </div>
+    <script src="./index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+      </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+      </script>
 
 </body>
+
 </html>

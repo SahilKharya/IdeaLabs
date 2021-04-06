@@ -1,4 +1,4 @@
-import { addNewPatient, getPatients, getPatientById } from '../controllers/patientController'
+import { addNewPatient, getPatients, getPatientByAddress, deletePatientById } from '../controllers/patientController'
 
 const routes = (app) => {
     app.route('/patient')
@@ -10,9 +10,8 @@ const routes = (app) => {
         .post(addNewPatient);
     
     app.route('/patient/:address')
-        .get(getPatientById)
-        .put((req, res)=>
-        res.send("Put"));
+        .get(getPatientByAddress)
+        .delete(deletePatientById);
 }
 
 export default routes;

@@ -22,8 +22,9 @@ export const getPatients = (req,res) => {
         res.json(patient);
     });
 }
-export const getPatientById = (req,res) => {
-    Patient.findById(req.params.address,(err, patient)=> {
+export const getPatientByAddress = (req,res) => {
+    // console.log(req)
+    Patient.find({address: req.params.address},(err, patient)=> {
         if(err) {
             res.send(err);
         }
@@ -33,11 +34,11 @@ export const getPatientById = (req,res) => {
 }
 
 export const deletePatientById = (req,res) => {
-    Patient.remove(req.params.address,(err, patient)=> {
+    Patient.remove({_id: req.params.address},(err, patient)=> {
         if(err) {
             res.send(err);
         }
 
-        res.json(patient);
+        res.send("Success");
     });
 }
