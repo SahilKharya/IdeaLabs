@@ -34,7 +34,7 @@ export const getPatientByAddress = (req,res) => {
 }
 
 export const deletePatientById = (req,res) => {
-    Patient.remove({_id: req.params.address},(err, patient)=> {
+    Patient.remove({address: req.params.address},(err, patient)=> {
         if(err) {
             res.send(err);
         }
