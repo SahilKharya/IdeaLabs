@@ -1,1 +1,7 @@
 /* Styles go here */
+.row {
+    width: 100%;
+}
+.col-s6 {
+    width: 50%;
+}
