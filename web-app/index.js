@@ -2,39 +2,39 @@
 // const Web3 = require('web3');
 // let web3 = new Web3(Web3.givenProvider || "http://localhost:9545");
 
-const web3 = new Web3('http://localhost:9545');
+// const web3 = new Web3('http://localhost:7545');
 var myAddress;
 window.addEventListener('load', async () => {
   // New web3 provider
   // console.log(Web3);
   // console.log(new Web3);
-//   if (window.ethereum) {
-//     const web3 = new Web3(window.ethereum);
-//     // try {
-//       ethereum.request({ method: 'eth_requestAccounts' })
-//       console.log(ethereum)
-//       console.log(window.ethereum)
-//       myAddress = ethereum.selectedAddress
-//       // user approved permission
-//     // } catch (error) {
-//     //   console.log('user rejected permission');
-//     // }
-//   }
-//   // Old web3 provider
-//   else if (window.web3) {
-//     const web3 = window.web3
-//     console.log('Old web3');
+  if (window.ethereum) {
+    const web3 = new Web3(window.ethereum);
+    // try {
+      ethereum.request({ method: 'eth_requestAccounts' })
+      console.log(ethereum)
+      console.log(window.ethereum)
+      myAddress = ethereum.selectedAddress
+      // user approved permission
+    // } catch (error) {
+    //   console.log('user rejected permission');
+    // }
+  }
+  // Old web3 provider
+  else if (window.web3) {
+    const web3 = window.web3
+    console.log('Old web3');
 
-//     // web3 = new Web3(window.web3.currentProvider());
-//     // no need to ask for permission
-//   }
-//   // No web3 provider
-//   else {
-//   //  const provider = new Web3.providers.HttpProvider("http://127.0.0.1:9545");
-// // const web3 = new Web3('http://localhost:9545');
+    // web3 = new Web3(window.web3.currentProvider());
+    // no need to ask for permission
+  }
+  // No web3 provider
+  else {
+  //  const provider = new Web3.providers.HttpProvider("http://127.0.0.1:9545");
+// const web3 = new Web3('http://localhost:9545');
 
-//     console.log('No web3 provider detected');
-//   }
+    console.log('No web3 provider detected');
+  }
 
 
   // //Fetch Ethereum Price 
@@ -58,9 +58,9 @@ window.addEventListener('load', async () => {
 var qr;
 
 
-let contractAddress = "0x9A0160dF759f8C479D48224404eA84426a17177E"
+let contractAddress = "0x06da83fafc43d437469A2616eeF3A70c870A3eAE"
 
-var contractAbi = [
+var contractAbi = web3.eth.contract([
   {
     "inputs": [],
     "payable": false,
@@ -184,10 +184,11 @@ var contractAbi = [
     "stateMutability": "nonpayable",
     "type": "function"
   }
-];
-const contract = new web3.eth.Contract(contractAbi,contractAddress);
+]
+);
+// const contract = new web3.eth.Contract(contractAbi,contractAddress);
 
-// var contract = contractAbi.at(contractAddress);
+var contract = contractAbi.at(contractAddress);
 var account;
 
 web3.eth.getAccounts(function (err, accounts) {
@@ -217,6 +218,7 @@ function stringToHash(string) {
   return hash;
 }
 function storeRecords(){
+  // e.preventDefault()
   name = document.getElementById('name').value;
   record = document.getElementById('record').value;
   record = record.trim();
@@ -239,7 +241,9 @@ function storeRecords(){
     console.error('Error:', error);
   });
 
-  contract.methods.storeRecordHash(name, record).send({
+
+  contract.storeRecordHash.sendTransaction(name, record, {
+  // contract.methods.storeRecordHash(name, record).send({
     from: account,
     gas: 100000
   }, function (error, result) {
@@ -265,7 +269,8 @@ function getRecords() {
   .catch((error) => {
     console.error('Error:', error);
   });
-  contract.methods.patientInfo(account).call(function (err, result) {
+  contract.patientInfo.call(account, function (err, result) {
+  // contract.methods.patientInfo(account).call(function (err, result) {
     if (!err)
       console.log(result);
     else
